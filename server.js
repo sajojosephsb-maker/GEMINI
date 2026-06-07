@@ -1,1 +1,2 @@
-app.use(cors({ origin: "https://your-frontend-app.netlify.app", credentials: true }));
+const PORT = process.env.PORT || 8080; 
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
