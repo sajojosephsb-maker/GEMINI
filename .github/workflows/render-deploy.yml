@@ -1,0 +1,22 @@
+name: Production CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # 🟢 Adds a manual "Run workflow" button in GitHub
+
+jobs:
+  deploy:
+    name: Trigger Render Deployment
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Invoke Render Deploy Webhook
+        run: |
+          echo "🚀 Initiating production build on Render..."
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+          echo "✅ Deploy signal successfully transmitted."
